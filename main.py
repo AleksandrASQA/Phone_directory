@@ -3,7 +3,7 @@ import json
 
 FILENAME = "contacts.json"
 
-def show_menu():
+def show_menu() -> str:
     """Показать меню и получить от пользователя номер команды."""
     menu =  """
     1. Открыть файл
@@ -22,7 +22,7 @@ def show_menu():
     return command
 
 
-def process_command(contacts, key):
+def process_command(contacts: list, key: str) -> tuple[list, bool]:
     """Обработка команды пользователя."""
     match key:
         case '1':
@@ -49,7 +49,7 @@ def process_command(contacts, key):
     return contacts, True
 
 
-def load_contacts(filename):
+def load_contacts(filename: str) -> list:
     """Открываем файл."""
     try:
         with open(filename, encoding='utf-8') as file:
@@ -60,7 +60,7 @@ def load_contacts(filename):
         return []
 
 
-def save_contacts(filename, contacts):
+def save_contacts(filename: str, contacts: list) -> None:
     """Сохраняем файл."""
     with open(filename, 'w', encoding='utf-8') as file:
         json.dump(
@@ -72,7 +72,7 @@ def save_contacts(filename, contacts):
     print("Файл сохранён.")
 
 
-def show_contacts(contacts):
+def show_contacts(contacts: list) -> None:
     """Показываем контакты."""
     if not contacts:
         print("Списка контактов нет.")
@@ -83,7 +83,7 @@ def show_contacts(contacts):
         print_contact(contact)
 
 
-def add_contact(contacts):
+def add_contact(contacts: list) -> None:
     """Добавляем новый контакт."""
     name = input("Введите имя: ")
     phone = input("Введите номер телефона: ")
@@ -103,7 +103,7 @@ def add_contact(contacts):
     print("Новый контакт добавлен.")
 
 
-def find_contact(contacts, search_text):
+def find_contact(contacts: list, search_text: str) -> None:
     """Ищем контакт."""
     if not contacts:
         print("Списка контактов нет.")
@@ -130,7 +130,7 @@ def find_contact(contacts, search_text):
         print("Такого контакта нет.")
 
 
-def edit_contact(contacts):
+def edit_contact(contacts: list) -> None:
     """Изменяем контакт."""
     if not contacts:
         print("Списка контактов нет.")
@@ -158,7 +158,7 @@ def edit_contact(contacts):
         print("Контакт не найден.")
 
 
-def delete_contact(contacts):
+def delete_contact(contacts: list) -> None:
     """Удаляем контакт."""
     if not contacts:
         print("Списка контактов нет.")
@@ -176,7 +176,7 @@ def delete_contact(contacts):
         print("Контакт не найден.")
 
 
-def print_contact(contact):
+def print_contact(contact: dict) -> None:
     """Печать одного контакта."""
     print(
         f"ID: {contact['id_user']}\n"
@@ -186,7 +186,7 @@ def print_contact(contact):
     )
 
 
-def main():
+def main() -> None:
     """Главный цикл работы приложения."""
     contacts = []
     is_running = True
